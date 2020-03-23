@@ -15,6 +15,12 @@ async def привет(ctx):
 	await ctx.send(f"привет{author.mention}")
 
 @Bot.command()
+async def пока(ctx):
+	author=ctx.message.author
+	await ctx.send(f"пока{author.mention}")
+	
+
+@Bot.command()
 
 async def досье(ctx, member:discord.Member):
         m=member
