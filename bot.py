@@ -15,8 +15,7 @@ Bot.remove_command("help")
 @Bot.command()
 async def help(ctx):
 	author=ctx.message.author
-	msg = await client.wait_for('message', check=check)
-	await ctx.send("`инфа {member} - показывает иформацию об учаснике\n \nзаменить {member} \"новое значение\" - заменяет известную информацию на новое значение\n \nдобавить {member} \"новая информация\" - дописывает новую информацию в конце уже известной` ")
+	await ctx.send("**инфа {member}** - показывает иформацию об учаснике\n**заменить {member} \"новое значение\"** - заменяет известную информацию на новое значение\n**добавить {member} \"новая информация\"** - дописывает новую информацию в конце уже известной ")
 
 
 
@@ -24,8 +23,7 @@ async def help(ctx):
 @Bot.command()
 async def привет(ctx):
 	author=ctx.message.author
-	msg = await client.wait_for('message', check=check)
-	await ctx.send(f"привет{author.mention}",format(msg))
+	await ctx.send(f"привет{author.mention}")
 
 
 
