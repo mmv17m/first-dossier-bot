@@ -2,6 +2,7 @@ import discord
 members=["lzlz"]
 
 
+
 from discord.ext import commands
 import os
 from discord.ext.commands import bot
