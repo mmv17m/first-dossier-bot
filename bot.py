@@ -25,7 +25,7 @@ async def help(ctx):
 async def привет(ctx):
 	author=ctx.message.author
 	msg = await client.wait_for('message', check=check)
-	await ctx.send(f"привет{author.mention}".format(msg))
+	await ctx.send(f"привет{author.mention}",format(msg))
 
 
 
