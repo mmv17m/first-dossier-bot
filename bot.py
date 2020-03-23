@@ -15,7 +15,7 @@ Bot.remove_command("help")
 @Bot.command()
 async def help(ctx):
 	author=ctx.message.author
-	await ctx.send("**перфикс  новое значение**  -  устанавливант перфикс(по умолчанию перфикса нет)\n cdbgv")
+	await ctx.send("**инфа member** - показывает иформацию об учаснике\n**заменить member новое значение(в "")** - заменяет известную информацию на новое значение\n**добавить member новая информация(в "")** - дописывает новую информацию в конце уже известной ")
 
 
 
@@ -31,12 +31,6 @@ async def привет(ctx):
 async def пока(ctx):
 	author=ctx.message.author
 	await ctx.send(f"пока{author.mention}")
-
-
-
-@Bot.command()
-async def префикс(ctx,pref):
-	Bot=commands.Bot(command_prefix=pref)
 
 
 
