@@ -7,7 +7,7 @@ import os
 from discord.ext.commands import bot
 
 Bot=commands.Bot(command_prefix="")
-Bot.remuve_command("help")
+Bot.remove_command("help")
 @Bot.command()
 
 async def привет(ctx):
