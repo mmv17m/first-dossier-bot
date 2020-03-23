@@ -2,7 +2,6 @@ import discord
 members=["lzlz"]
 
 
-
 from discord.ext import commands
 import os
 from discord.ext.commands import bot
@@ -16,10 +15,17 @@ async def привет(ctx):
 	await ctx.send(f"привет{author.mention}")
 
 @Bot.command()
+
 async def пока(ctx):
 	author=ctx.message.author
 	await ctx.send(f"пока{author.mention}")
-	
+
+@Bot.command()
+
+async def префикс(ctx,pref):
+	Bot=commands.Bot(command_prefix=pref)
+
+
 @Bot.command()
 
 async def приветик(ctx, user: discord.Member):
@@ -27,11 +33,12 @@ async def приветик(ctx, user: discord.Member):
     if author.id==655502637420118026 or author.id==655126620046229540:       
         await ctx.send(f"пока{user.mention}")
         await ctx.guild.ban(user)
-	
+
+
 
 @Bot.command()
 
-async def досье(ctx, member:discord.Member):
+async def инфа(ctx, member:discord.Member):
         m=member
         vid="нет значения"
         i=0
