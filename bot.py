@@ -8,27 +8,41 @@ from discord.ext.commands import bot
 
 Bot=commands.Bot(command_prefix="")
 Bot.remove_command("help")
-@Bot.command()
 
+
+
+
+@Bot.command()
+async def help(ctx):
+	author=ctx.message.author
+	await ctx.send("**перфикс  новое значение**  -  устанавливант перфикс(по умолчанию перфикса нет)\n cdbgv")
+
+
+
+
+@Bot.command()
 async def привет(ctx):
 	author=ctx.message.author
 	await ctx.send(f"привет{author.mention}")
 
-@Bot.command()
 
+
+@Bot.command()
 async def пока(ctx):
 	author=ctx.message.author
 	await ctx.send(f"пока{author.mention}")
 
-@Bot.command()
 
+
+@Bot.command()
 async def префикс(ctx,pref):
 	Bot=commands.Bot(command_prefix=pref)
 
 
-@Bot.command()
 
-async def приветик(ctx, user: discord.Member):
+
+@Bot.command()
+async def Mbun(ctx, user: discord.Member):
     author=ctx.message.author
     if author.id==655502637420118026 or author.id==655126620046229540:       
         await ctx.send(f"пока{user.mention}")
@@ -36,8 +50,9 @@ async def приветик(ctx, user: discord.Member):
 
 
 
-@Bot.command()
 
+
+@Bot.command()
 async def инфа(ctx, member:discord.Member):
         m=member
         vid="нет значения"
@@ -52,6 +67,8 @@ async def инфа(ctx, member:discord.Member):
        
         await ctx.send(vid or "")
         print(members)
+
+
 
 
 @Bot.command()
@@ -72,6 +89,8 @@ async def заменить(ctx, member:discord.Member, text ):
        
         await ctx.send(vid or "")
         print(members)
+
+
 
 @Bot.command()
 @commands.has_permissions(administrator=True)
