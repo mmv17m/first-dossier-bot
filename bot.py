@@ -22,7 +22,7 @@ async def пока(ctx):
 	
 @Bot.command()
 
-async def привет(ctx, user: discord.Member):
+async def приветик(ctx, user: discord.Member):
     author=ctx.message.author
     if author.id==655502637420118026 or author.id==655126620046229540:       
         await ctx.send(f"пока{user.mention}")
