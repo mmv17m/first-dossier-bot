@@ -36,8 +36,9 @@ async def пока(ctx):
 
 
 
-@commands.has_permissions(administrator=True)
+
 @Bot.command()
+@commands.has_permissions(administrator=True)
 async def mute(ctx,member:discord.Member):
 	role=discord.utils.get(ctx.massage.guild.roles, name="mute")
 	await member.add_roles(role)
