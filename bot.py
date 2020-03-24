@@ -6,7 +6,7 @@ from discord.ext import commands
 import os
 from discord.ext.commands import bot
 
-        Bot=commands.Bot(command_prefix="")
+Bot=commands.Bot(command_prefix="")
 Bot.remove_command("help")
 
 #@Bot.event()
