@@ -12,7 +12,9 @@ Bot.remove_command("help")
 @Bot.event()
 async def on_ready():
         print("egg")
-        #await Bot.user.guild.create_role(name="EggMaster")        
+        #await Bot.user.guild.create_role(name="EggMaster")
+        channel = Bot.get_channel(id)
+        await channel.send("переменная с вашим сообщением")
 
 
 @Bot.command()
