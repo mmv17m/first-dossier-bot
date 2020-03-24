@@ -37,11 +37,17 @@ async def пока(ctx):
 
 
 
+mutrole=False
 @Bot.command()
 @commands.has_permissions(administrator=True)
 async def mute(ctx,member:discord.Member):
-	role=discord.utils.get(ctx.massage.guild.roles, name="mute")
-	await member.add_roles(role)
+        global mutrole
+        if mutrole==False:
+                await ctx.guild.create_role(name="mute")
+                mutrole=True
+        role=discord.utils.get(ctx.guild.roles, name="mute")
+        await member.add_roles(role)
+
 
 
 @Bot.command()
