@@ -119,9 +119,10 @@ async def bun(ctx, user: discord.Member):
         await ctx.send(embed=emb)
         await ctx.guild.ban(user)
 
-@client.command()
+@Bot.command()
 async def clear(ctx, amount):
     await ctx.channel.purge(limit=int(amount))
+    emb = discord.Embed(description =f"**Удалено сообщений:**\n{amount}",colour=discord.Color.light_grey())
     await ctx.channel.send(':: Сообщения успешно удалены')
 
 
