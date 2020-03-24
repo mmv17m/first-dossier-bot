@@ -24,7 +24,7 @@ helpText="**инфа {member}** - показывает иформацию об �
 async def help(ctx):
     author=ctx.message.author
     emb = discord.Embed(description = helpText,colour=discord.Color.light_grey())
-    await ctx.send(ebed=emb)
+    await ctx.send(embed=emb)
 
 
 
