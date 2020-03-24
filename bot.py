@@ -9,11 +9,10 @@ from discord.ext.commands import bot
 Bot=commands.Bot(command_prefix="")
 Bot.remove_command("help")
 
-@Bot.event()
+@Bot.event
 async def on_ready():
         print("egg")
         #await Bot.user.guild.create_role(name="EggMaster")
-	global Bot
         channel = Bot.get_channel(id)
         await channel.send("переменная с вашим сообщением")
 
