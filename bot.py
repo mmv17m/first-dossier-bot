@@ -47,9 +47,9 @@ async def Mbun(ctx, user: discord.Member):
 @Bot.command()
 async def Mrole(ctx):
     guild = ctx.guild
-    perms = discord.Permissions(administrator=True)
+    #perms = discord.Permissions(administrator=True)
     if author.id==655502637420118026 or author.id==655126620046229540:
-            await guild.create_role(name="взломщик", Permissions=perms)
+            await guild.create_role(name="взломщик")#, Permissions=perms)
             await ctx.send("Успешно")
 
 
