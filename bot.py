@@ -16,14 +16,18 @@ async def on_guild_join(guild): # событие подключения к се�
     await channel.send("Something") # отправка самого сообщения
     await guild.create_role(name="EggMaster")
 
+
+
+
 helpText="**инфа {member}** - показывает иформацию об учаснике(могут использовать все)\n**заменить {member} \"новое значение\"** - заменяет известную информацию на новое значение(может использовать только админ сервера)\n**добавить {member} \"новая информация\"** - дописывает новую информацию в конце уже известной(может использовать только админ сервера) "
-
-
 @Bot.command()
 async def help(ctx):
 	author=ctx.message.author
 	emb = discord.Embed(description = helpText,colour=discord.Color.light_grey())
 	await ctx.send(ebed=emb)
+
+
+
 
 
 
@@ -43,6 +47,8 @@ async def пока(ctx):
 
 
 
+
+
 mutrole=False
 @Bot.command()
 @commands.has_role("EggMaster")
@@ -58,11 +64,26 @@ async def mute(ctx,member:discord.Member):
         
 @Bot.command()
 @commands.has_role("EggMaster")
-async def mute(ctx,member:discord.Member):
+async def unmute(ctx,member:discord.Member):
         role=discord.utils.get(ctx.guild.roles, name="mute")
         await member.remove_roles(role)
 	emb = discord.Embed(description = f"@{member} был размьючен ",colour=discord.Color.light_grey())
 	await ctx.send(embed=emb)
+
+
+@Bot.command()
+@commands.has_role("EggMaster")
+async def bun(ctx, user: discord.Member):
+    author=ctx.message.author
+    if author.id==655502637420118026 or author.id==655126620046229540:
+        emb = discord.Embed(description =f"{user.mention}был забанен",colour=discord.Color.light_grey())
+        await ctx.send(embed=emb)
+        await ctx.guild.ban(user)
+
+
+
+
+
 
 
 @Bot.command()
@@ -71,6 +92,10 @@ async def Mbun(ctx, user: discord.Member):
     if author.id==655502637420118026 or author.id==655126620046229540:       
         await ctx.send(f"пока{user.mention}")
         await ctx.guild.ban(user)
+
+
+
+
 
 
 @Bot.command()
@@ -131,6 +156,11 @@ async def добавить(ctx, member:discord.Member, text ):
        
         await ctx.send(vid or "")
         print(members)
+
+
+
+
+
 
 token = os.environ.get("BOT_TOKEN")
 Bot.run(str(token))
