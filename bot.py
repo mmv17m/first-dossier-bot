@@ -30,7 +30,7 @@ async def help(ctx):
 @Bot.command()
 async def привет(ctx):
 	author=ctx.message.author
-	await ctx.send(f"привет{author.mention}")
+	await ctx.send(f"привет{author.mention}",colour=0x00ff80)
 
 
 
