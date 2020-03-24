@@ -22,7 +22,7 @@ helpText="**инфа {member}** - показывает иформацию об �
 @Bot.command()
 async def help(ctx):
 	author=ctx.message.author
-	await ctx.send(helpText,colour=0x00ff80)
+	await ctx.send(helpText,color=0x00ff80)
 
 
 
