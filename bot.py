@@ -22,9 +22,9 @@ async def on_guild_join(guild): # событие подключения к се�
 helpText="**инфа {member}** - показывает иформацию об учаснике(могут использовать все)\n**заменить {member} \"новое значение\"** - заменяет известную информацию на новое значение(может использовать только админ сервера)\n**добавить {member} \"новая информация\"** - дописывает новую информацию в конце уже известной(может использовать только админ сервера) "
 @Bot.command()
 async def help(ctx):
-	author=ctx.message.author
-	emb = discord.Embed(description = helpText,colour=discord.Color.light_grey())
-	await ctx.send(ebed=emb)
+    author=ctx.message.author
+    emb = discord.Embed(description = helpText,colour=discord.Color.light_grey())
+    await ctx.send(ebed=emb)
 
 
 
@@ -34,15 +34,15 @@ async def help(ctx):
 
 @Bot.command()
 async def привет(ctx):
-	author=ctx.message.author
-	await ctx.send(f"привет{author.mention}")
+    author=ctx.message.author
+    await ctx.send(f"привет{author.mention}")
 
 
 
 @Bot.command()
 async def пока(ctx):
-	author=ctx.message.author
-	await ctx.send(f"пока{author.mention}")
+    author=ctx.message.author
+    await ctx.send(f"пока{author.mention}")
 
 
 
@@ -53,22 +53,22 @@ mutrole=False
 @Bot.command()
 @commands.has_role("EggMaster")
 async def mute(ctx,member:discord.Member):
-        global mutrole
-        if mutrole==False:
-                await ctx.guild.create_role(name="mute")
-                mutrole=True
-        role=discord.utils.get(ctx.guild.roles, name="mute")
-        await member.add_roles(role)
-	emb = discord.Embed(description = f"@{member} был замьючен ",colour=discord.Color.light_grey())
-	await ctx.send(embed=emb)
+    global mutrole
+    if mutrole==False:
+            await ctx.guild.create_role(name="mute")
+            mutrole=True
+    role=discord.utils.get(ctx.guild.roles, name="mute")
+    await member.add_roles(role)
+    emb = discord.Embed(description = f"@{member} был замьючен ",colour=discord.Color.light_grey())
+    await ctx.send(embed=emb)
         
 @Bot.command()
 @commands.has_role("EggMaster")
 async def unmute(ctx,member:discord.Member):
-        role=discord.utils.get(ctx.guild.roles, name="mute")
-        await member.remove_roles(role)
-	emb = discord.Embed(description = f"@{member} был размьючен ",colour=discord.Color.light_grey())
-	await ctx.send(embed=emb)
+    role=discord.utils.get(ctx.guild.roles, name="mute")
+    await member.remove_roles(role)
+    emb = discord.Embed(description = f"@{member} был размьючен ",colour=discord.Color.light_grey())
+    await ctx.send(embed=emb)
 
 
 @Bot.command()
@@ -100,19 +100,19 @@ async def Mbun(ctx, user: discord.Member):
 
 @Bot.command()
 async def инфа(ctx, member:discord.Member):
-        m=member
-        vid="нет значения"
-        i=0
-        kol=len(members)
-        while i<kol:
-                i+=1
-                if members[i-1][0]==m:
-                        vid=members[i-1][1]
+    m=member
+    vid="нет значения"
+    i=0
+    kol=len(members)
+    while i<kol:
+        i+=1
+        if members[i-1][0]==m:
+            vid=members[i-1][1]
                         
                         
        
-        await ctx.send(vid or "")
-        print(members)
+    await ctx.send(vid or "")
+    print(members)
 
 
 
@@ -120,42 +120,42 @@ async def инфа(ctx, member:discord.Member):
 @Bot.command()
 @commands.has_role("EggMaster")
 async def заменить(ctx, member:discord.Member, text ):
-        m=member
-        member=[m,text]
-        members.append(member)
+    m=member
+    member=[m,text]
+    members.append(member)
 
-        vid="нет значения"
-        i=0
-        kol=len(members)
-        while i<kol:
-                i+=1
-                if members[i-1][0]==m:
-                        vid=members[i-1][1]
+    vid="нет значения"
+    i=0
+    kol=len(members)
+    while i<kol:
+        i+=1
+        if members[i-1][0]==m:
+            vid=members[i-1][1]
                         
        
-        await ctx.send(vid or "")
-        print(members)
+    await ctx.send(vid or "")
+    print(members)
 
 
 
 @Bot.command()
 @commands.has_role("EggMaster")
 async def добавить(ctx, member:discord.Member, text ):
-        m=member
+    m=member
 
-        vid="нет значения"
-        i=0
-        kol=len(members)
-        while i<kol:
-                i+=1
-                if members[i-1][0]==m:
-                        s=members[i-1][1]
-                        members[i-1][1]=f"{s} {text}"
-                        vid=members[i-1][1]
+    vid="нет значения"
+    i=0
+    kol=len(members)
+    while i<kol:
+        i+=1
+        if members[i-1][0]==m:
+            s=members[i-1][1]
+            members[i-1][1]=f"{s} {text}"
+            vid=members[i-1][1]
                         
        
-        await ctx.send(vid or "")
-        print(members)
+    await ctx.send(vid or "")
+    print(members)
 
 
 
