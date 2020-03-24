@@ -44,7 +44,7 @@ async def пока(ctx):
 
 mutrole=False
 @Bot.command()
-@commands.has_permissions(administrator=True)
+@commands.has_role("EggMaster")
 async def mute(ctx,member:discord.Member):
         global mutrole
         if mutrole==False:
@@ -91,7 +91,7 @@ async def инфа(ctx, member:discord.Member):
 
 
 @Bot.command()
-@commands.has_permissions(administrator=True)
+@commands.has_role("EggMaster")
 async def заменить(ctx, member:discord.Member, text ):
         m=member
         member=[m,text]
@@ -112,7 +112,7 @@ async def заменить(ctx, member:discord.Member, text ):
 
 
 @Bot.command()
-@commands.has_permissions(administrator=True)
+@commands.has_role("EggMaster")
 async def добавить(ctx, member:discord.Member, text ):
         m=member
 
