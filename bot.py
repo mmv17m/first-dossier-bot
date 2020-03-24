@@ -14,7 +14,9 @@ async def on_guild_join(guild): # событие подключения к се�
     category = guild.categories[0] # выбирает первую категорию из сервера, к которому подключился
     channel = category.channels[0] # получает первый канал в первой категории
     await channel.send("Something") # отправка самого сообщения
-    await ctx.guild.create_role(name="EggMaster")
+    await guild.create_role(name="EggMaster")
+
+
 
 
 @Bot.command()
