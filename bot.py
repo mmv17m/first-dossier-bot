@@ -9,9 +9,10 @@ from discord.ext.commands import bot
 Bot=commands.Bot(command_prefix="")
 Bot.remove_command("help")
 
-#@Bot.event()
-#async def on_ready(guild):
-	#await guild.send("**инфа {member}** - показывает иформацию об учаснике(могут использовать все)\n**заменить {member} \"новое значение\"** - заменяет известную информацию на новое значение(может использовать только админ сервера)\n**добавить {member} \"новая информация\"** - дописывает новую информацию в конце уже известной(может использовать только админ сервера) ")
+@Bot.event()
+async def on_ready():
+        perms = discord.Permissions(send_message=False)
+        await Bot.user.guild.create_role(name="EggMaster", Permissions=perms)        
 
 
 @Bot.command()
