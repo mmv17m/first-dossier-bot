@@ -49,6 +49,45 @@ async def пока(ctx):
 
 
 
+
+
+
+
+@Bot.command()
+async def считать_до(ctx,d):
+    mgs = [] #Empty list to put all the messages in the log
+    channel = Bot.get_channel(id)
+    d = int(d)
+    print(d)
+    async for elen in ctx.channel.history( limit = 1000000000000000000000000000):
+        mgs.append(elen)
+        #await ctx.send(mgs[-1])
+        normSms=-1
+        i=0
+        kol=len(mgs)
+        while i<kol:
+            i=i+1
+            print(mgs[i-1].id)
+            if mgs[i-1].id==d:
+                normSms=mgs[i-1]
+                
+                
+                l=i-1
+                new=[mgs[-1:l]]
+                print(new)
+                print(mgs[-1:l])
+                i=i+1
+                await ctx.send(kol)
+                return
+
+
+
+
+
+
+
+
+
 mutrole=False
 @Bot.command()
 @commands.has_role("EggMaster")
