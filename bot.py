@@ -22,7 +22,8 @@ helpText="**инфа {member}** - показывает иформацию об �
 @Bot.command()
 async def help(ctx):
 	author=ctx.message.author
-	await ctx.send(helpText,color=0x00ff80)
+	emb = discord.Embed(description = helpText,colour=discord.Color.light_grey())
+	await ctx.send(ebed=emb)
 
 
 
@@ -52,6 +53,9 @@ async def mute(ctx,member:discord.Member):
                 mutrole=True
         role=discord.utils.get(ctx.guild.roles, name="mute")
         await member.add_roles(role)
+	emb = discord.Embed(description = f"@{member} был замьючен ",colour=discord.Color.light_grey())
+	await ctx.send(embed=emb)
+        
 
 
 
