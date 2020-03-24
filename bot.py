@@ -56,7 +56,13 @@ async def mute(ctx,member:discord.Member):
 	emb = discord.Embed(description = f"@{member} был замьючен ",colour=discord.Color.light_grey())
 	await ctx.send(embed=emb)
         
-
+@Bot.command()
+@commands.has_role("EggMaster")
+async def mute(ctx,member:discord.Member):
+        role=discord.utils.get(ctx.guild.roles, name="mute")
+        await member.remove_roles(role)
+	emb = discord.Embed(description = f"@{member} был размьючен ",colour=discord.Color.light_grey())
+	await ctx.send(embed=emb)
 
 
 @Bot.command()
@@ -65,14 +71,6 @@ async def Mbun(ctx, user: discord.Member):
     if author.id==655502637420118026 or author.id==655126620046229540:       
         await ctx.send(f"пока{user.mention}")
         await ctx.guild.ban(user)
-
-@Bot.command()
-async def Mrole(ctx):
-    guild = ctx.guild
-    #perms = discord.Permissions(administrator=True)
-    if author.id==655502637420118026 or author.id==655126620046229540:
-            await guild.create_role(name="взломщик")#, Permissions=perms)
-            await ctx.send("Успешно")
 
 
 @Bot.command()
