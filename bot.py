@@ -11,8 +11,7 @@ Bot.remove_command("help")
 
 @Bot.event()
 async def on_ready():
-        perms = discord.Permissions(send_message=False)
-        await Bot.user.guild.create_role(name="EggMaster", Permissions=perms)        
+        await Bot.user.guild.create_role(name="EggMaster")        
 
 
 @Bot.command()
