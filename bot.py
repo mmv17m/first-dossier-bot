@@ -81,6 +81,79 @@ async def считать_до(ctx,d):
                 return
 
 
+@commands.has_role("EggMaster")
+@Bot.command()
+async def find(ctx,txt:str):
+    guild=ctx.guild
+    emb = discord.Embed(description = "операция выполняется...",colour=discord.Color.light_grey())
+    await ctx.send(embed=emb)
+    prob=["никто",0]
+    num=[prob]
+
+    kol=0
+    i=0
+    while i<len(guild.categories):
+        category=guild.categories[i]
+        j=0
+        while j<len(category.channels):
+            channel=category.channels[j]
+            if channel.type ==discord.ChannelType.text:
+                print("ok1")
+                
+                
+                k=0
+                mgs=[]
+                
+                async for elen in channel.history( limit = 1000000000000000000000000000):
+                    mgs.append(elen)
+                    print("ok2")
+                while k<len(mgs):
+                    print("ok3")
+                    m=mgs[k]
+                    if txt in m.content:
+                        print("ok4")
+                        z=0
+                        key=0
+                        while z<len(num) and key==0:
+                            print("ok5")
+                            if num[z][0]==m.author.name:
+                                print("ok6")
+                                num[z][1]=num[z][1]+1
+                                key=1
+                            z=z+1
+
+                        if key==0:
+                            print("ok7")
+                            goil=[m.author.name,1]
+                            num.append(goil)
+                            #emb = discord.Embed(description = num[],colour=discord.Color.light_grey())
+                            #await ctx.send(num)
+                            print(num)
+                        kol=kol+1
+                        
+                    k=k+1
+            j=j+1
+        i=i+1
+    n=0
+    if len(num) != 0:
+        while n<len(num):
+            print("ok8")
+            #emb = discord.Embed(description = f"@{num[n][0]} - {num[n][1]}",colour=discord.Color.light_grey())
+            await ctx.send(f"@{num[n][0]} - {num[n][1]}")
+            n=n+1
+    emb = discord.Embed(description = f"Операция выполнена. Всего:{kol}",colour=discord.Color.light_grey())
+    await ctx.send(embed=emb)    
+
+
+
+
+
+
+
+
+
+
+
 
 
 
