@@ -19,7 +19,7 @@ async def on_guild_join(guild): # событие подключения к се�
 
 
 
-helpText=" ще не готов"
+helpText=" еще не готов"
 @Bot.command()
 async def help(ctx):
     author=ctx.message.author
@@ -81,8 +81,9 @@ async def считать_до(ctx,d):
                 return
 
 
-@commands.has_role("EggMaster")
+
 @Bot.command()
+@commands.has_role("EggMaster")
 async def find(ctx,txt:str):
     guild=ctx.guild
     emb = discord.Embed(description = "операция выполняется...",colour=discord.Color.light_grey())
@@ -197,7 +198,7 @@ async def bun(ctx, user: discord.Member):
 async def clear(ctx, amount):
     await ctx.channel.purge(limit=int(amount))
     emb = discord.Embed(description =f"**Удалено сообщений:**\n{amount}",colour=discord.Color.light_grey())
-    await ctx.channel.send(':: Сообщения успешно удалены')
+    await ctx.channel.send(embed=emb)
 
 
 
