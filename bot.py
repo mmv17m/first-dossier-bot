@@ -193,6 +193,7 @@ async def bun(ctx, user: discord.Member):
         await ctx.guild.ban(user)
 
 @Bot.command()
+@commands.has_role("EggMaster")
 async def clear(ctx, amount):
     await ctx.channel.purge(limit=int(amount))
     emb = discord.Embed(description =f"**Удалено сообщений:**\n{amount}",colour=discord.Color.light_grey())
