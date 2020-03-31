@@ -67,7 +67,7 @@ async def StartVote(ctx, kol: int):
     global golosovanie
     golosovanie=1
     i=0
-    while i<=kol:
+    while i<kol:
         golos.append(0)
         i=i+1
     emb = discord.Embed(description = "голосование успешно началось",colour=discord.Color.light_grey())
@@ -79,7 +79,7 @@ async def StartVote(ctx, kol: int):
 async def vote(ctx, kol: int):
     print("ok")
     if golosovanie==1:
-        if kol<kolic and kol != 0:
+        if kol<=kolic and kol != 0:
 
             print("ok")
             z=0
@@ -121,7 +121,7 @@ async def VoteList(ctx):
 @commands.has_role("EggMaster")
 async def rename(ctx, num: int, nam: str):
     if golosovanie==1:
-        if num<kolic and num !=0:
+        if num<=kolic and num !=0:
             vote_nick[num-1] = nam
 
 
