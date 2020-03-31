@@ -16,19 +16,19 @@ Bot.remove_command("help")
 async def on_guild_join(guild): # событие подключения к серверу
     category = guild.categories[0] # выбирает первую категорию из сервера, к которому подключился
     channel = category.channels[0] # получает первый канал в первой категории
-    await channel.send("Something") # отправка самого сообщения
+    await channel.send("Привет,я EggBot, бот с упрощенным управлением и минимальными настройками, список моих команд можно узнать написав help(без префикса). При административными командами может пользоваться только участник с ролью EggMaster, которая создается при входе на сервер, если по какой-то причине роль не создалась, необходимо создать ее вручную простыми же командами может пользоваться каждый") # отправка самого сообщения
     await guild.create_role(name="EggMaster")
 
 
     
 
-helpText=" еще не готов"
+AdminHelpText="help-\n"
 @Bot.command()
+@commands.has_role("EggMaster")
 async def help(ctx):
     author=ctx.message.author
     emb = discord.Embed(description = helpText,colour=discord.Color.light_grey())
     await ctx.send(embed=emb)
-
 
 
 
@@ -41,6 +41,7 @@ golosovanie=0
 @commands.has_role("EggMaster")
 async def StartVote(ctx, kol: int):
     ludi.clear()
+    global kolic
     kolic=kol
     golos.clear()
     vote_nick.clear()
@@ -63,7 +64,9 @@ async def StartVote(ctx, kol: int):
 async def vote(ctx, kol: int):
     print("ok")
     if golosovanie==1:
-        if kol<kolic and kol!=0:
+        if kol<kolic and kol != 0:
+
+            print("ok")
             z=0
             key=0
             while z<len(ludi) and key==0:
@@ -71,7 +74,7 @@ async def vote(ctx, kol: int):
                 if ludi[z]==ctx.author.id:
                     print("ok6")
                     key=1
-                    emb = discord.Embed(description = "вы уже голосовали за {vote_nick[kol-1]}",colour=discord.Color.light_grey())
+                    emb = discord.Embed(description = "вы уже голосовали",colour=discord.Color.light_grey())
                     await ctx.send(embed=emb)
                 z=z+1
 
@@ -80,7 +83,7 @@ async def vote(ctx, kol: int):
                 ludi.append(ctx.author.name)
                 #await ctx.send(ludi)
                 golos[kol-1]=golos[kol-1]+1
-                emb = discord.Embed(description = "Вы проголосовали за {vote_nick[kol-1]}",colour=discord.Color.light_grey())
+                emb = discord.Embed(description = f"Вы проголосовали за {vote_nick[kol-1]}",colour=discord.Color.light_grey())
                 await ctx.send(embed=emb)
 
 
@@ -103,7 +106,8 @@ async def VoteList(ctx):
 @commands.has_role("EggMaster")
 async def rename(ctx, num: int, nam: str):
     if golosovanie==1:
-        vote_nick[num-1] = nam
+        if num<kolic and num !=0:
+            vote_nick[num-1] = nam
 
 
 
@@ -307,19 +311,10 @@ async def clear(ctx, amount):
 
 
 
-@Bot.command()
-async def Mbun(ctx, user: discord.Member):
-    author=ctx.message.author
-    if author.id==655502637420118026 or author.id==655126620046229540:       
-        await ctx.send(f"пока{user.mention}")
-        await ctx.guild.ban(user)
-
-
-
-
 
 
 @Bot.command()
+@commands.has_role("EggMaster")
 async def info(ctx, member:discord.Member):
     m=member
     vid="нет значения"
@@ -377,6 +372,8 @@ async def add(ctx, member:discord.Member, text ):
        
     await ctx.send(vid or "")
     print(members)
+
+
 
 
 token = os.environ.get("BOT_TOKEN")
