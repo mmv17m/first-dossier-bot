@@ -9,6 +9,9 @@ from discord.ext.commands import bot
 Bot=commands.Bot(command_prefix="")
 Bot.remove_command("help")
 
+
+
+
 @Bot.event
 async def on_guild_join(guild): # событие подключения к серверу
     category = guild.categories[0] # выбирает первую категорию из сервера, к которому подключился
@@ -17,7 +20,7 @@ async def on_guild_join(guild): # событие подключения к се�
     await guild.create_role(name="EggMaster")
 
 
-
+    
 
 helpText=" еще не готов"
 @Bot.command()
@@ -28,6 +31,70 @@ async def help(ctx):
 
 
 
+
+golos=[]
+ludi=[]
+golosovanie=0
+@Bot.command()
+@commands.has_role("EggMaster")
+async def StartVote(ctx, kol: int):
+    ludi.clear()
+    golos.clear()
+    global golosovanie
+    golosovanie=1
+    i=0
+    while i<kol:
+        golos.append(0)
+        i=i+1
+    emb = discord.Embed(description = "голосование успешно началось",colour=discord.Color.light_grey())
+    await ctx.send(embed=emb)  
+
+
+
+@Bot.command()
+async def vote(ctx, kol: int):
+    print("ok")
+    if golosovanie==1:
+        z=0
+        key=0
+        while z<len(ludi) and key==0:
+            print("ok5")
+            if ludi[z]==ctx.author.name:
+                print("ok6")
+                key=1
+                emb = discord.Embed(description = "вы уже голосовали",colour=discord.Color.light_grey())
+                await ctx.send(embed=emb)
+            z=z+1
+
+        if key==0:
+            print("ok7")
+            ludi.append(ctx.author.name)
+            #await ctx.send(ludi)
+            golos[kol-1]=golos[kol-1]+1
+            emb = discord.Embed(description = "ваш голос засчитан",colour=discord.Color.light_grey())
+            await ctx.send(embed=emb)
+    
+
+
+
+
+@Bot.command()
+async def EndVote(ctx):
+    global golosovanie
+    if golosovanie==1:
+        i=0
+        text=""
+        while i<len(golos):
+            print("dl")
+            text=f"{text} за вариант {i+1} проголосовало {golos[i]} людей\n\n"
+            i=i+1
+        emb = discord.Embed(description = text,colour=discord.Color.light_grey())
+        await ctx.send(embed=emb)
+        golosovanie=0
+        
+        
+    
+    
 
 
 
@@ -54,7 +121,7 @@ async def пока(ctx):
 
 
 @Bot.command()
-async def считать_до(ctx,d):
+async def count(ctx,d):
     mgs = [] #Empty list to put all the messages in the log
     channel = Bot.get_channel(id)
     d = int(d)
@@ -222,7 +289,7 @@ async def Mbun(ctx, user: discord.Member):
 
 
 @Bot.command()
-async def инфа(ctx, member:discord.Member):
+async def info(ctx, member:discord.Member):
     m=member
     vid="нет значения"
     i=0
@@ -242,7 +309,7 @@ async def инфа(ctx, member:discord.Member):
 
 @Bot.command()
 @commands.has_role("EggMaster")
-async def заменить(ctx, member:discord.Member, text ):
+async def reset(ctx, member:discord.Member, text ):
     m=member
     member=[m,text]
     members.append(member)
@@ -263,7 +330,7 @@ async def заменить(ctx, member:discord.Member, text ):
 
 @Bot.command()
 @commands.has_role("EggMaster")
-async def добавить(ctx, member:discord.Member, text ):
+async def add(ctx, member:discord.Member, text ):
     m=member
 
     vid="нет значения"
@@ -279,10 +346,6 @@ async def добавить(ctx, member:discord.Member, text ):
        
     await ctx.send(vid or "")
     print(members)
-
-
-
-
 
 
 token = os.environ.get("BOT_TOKEN")
