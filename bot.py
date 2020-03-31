@@ -32,7 +32,7 @@ async def link(ctx):
 
 AdminHelpText=""
 @Bot.command()
-@commands.has_role("EggMaster")
+#@commands.has_role("EggMaster")
 async def help(ctx):
     author=ctx.message.author
     role=discord.utils.get(ctx.guild.roles, name="EggMaster")
