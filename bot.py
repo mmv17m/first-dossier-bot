@@ -98,7 +98,7 @@ async def vote(ctx, kol: int):
                 ludi.append(ctx.author.name)
                 #await ctx.send(ludi)
                 golos[kol-1]=golos[kol-1]+1
-                emb = discord.Embed(description = f"Вы проголосовали за {vote_nick[kol-1]}",colour=discord.Color.light_grey())
+                emb = discord.Embed(description = f"Вы проголосовали за: {vote_nick[kol-1]}",colour=discord.Color.light_grey())
                 await ctx.send(embed=emb)
 
 
@@ -305,10 +305,9 @@ async def unmute(ctx,member:discord.Member):
 @commands.has_role("EggMaster")
 async def bun(ctx, user: discord.Member):
     author=ctx.message.author
-    if author.id==655502637420118026 or author.id==655126620046229540:
-        emb = discord.Embed(description =f"{user.mention}был забанен",colour=discord.Color.light_grey())
-        await ctx.send(embed=emb)
-        await ctx.guild.ban(user)
+    emb = discord.Embed(description =f"{user.mention}был забанен",colour=discord.Color.light_grey())
+    await ctx.send(embed=emb)
+    await ctx.guild.ban(user)
 
 @Bot.command()
 @commands.has_role("EggMaster")
