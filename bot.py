@@ -32,14 +32,22 @@ async def help(ctx):
 
 
 
+vote_nick=[]
 golos=[]
 ludi=[]
+kolic=0
 golosovanie=0
 @Bot.command()
 @commands.has_role("EggMaster")
 async def StartVote(ctx, kol: int):
     ludi.clear()
+    kolic=kol
     golos.clear()
+    vote_nick.clear()
+    i=0
+    while i<=kolic:
+        vote_nick.append(i+1)        
+        i=i+1
     global golosovanie
     golosovanie=1
     i=0
@@ -55,30 +63,53 @@ async def StartVote(ctx, kol: int):
 async def vote(ctx, kol: int):
     print("ok")
     if golosovanie==1:
-        z=0
-        key=0
-        while z<len(ludi) and key==0:
-            print("ok5")
-            if ludi[z]==ctx.author.name:
-                print("ok6")
-                key=1
-                emb = discord.Embed(description = "вы уже голосовали",colour=discord.Color.light_grey())
-                await ctx.send(embed=emb)
-            z=z+1
+        if kol<kolic and kol!=0:
+            z=0
+            key=0
+            while z<len(ludi) and key==0:
+                print("ok5")
+                if ludi[z]==ctx.author.id:
+                    print("ok6")
+                    key=1
+                    emb = discord.Embed(description = "вы уже голосовали за {vote_nick[kol-1]}",colour=discord.Color.light_grey())
+                    await ctx.send(embed=emb)
+                z=z+1
 
-        if key==0:
-            print("ok7")
-            ludi.append(ctx.author.name)
-            #await ctx.send(ludi)
-            golos[kol-1]=golos[kol-1]+1
-            emb = discord.Embed(description = "ваш голос засчитан",colour=discord.Color.light_grey())
-            await ctx.send(embed=emb)
-    
+            if key==0:
+                print("ok7")
+                ludi.append(ctx.author.name)
+                #await ctx.send(ludi)
+                golos[kol-1]=golos[kol-1]+1
+                emb = discord.Embed(description = "Вы проголосовали за {vote_nick[kol-1]}",colour=discord.Color.light_grey())
+                await ctx.send(embed=emb)
+
+
+@Bot.command()
+async def VoteList(ctx):
+    ludi.append(ctx.author.name)
+    if golosovanie==1:
+        i=0
+        text=""
+        while i<len(golos):
+            print("dl")
+            text=f"{text} {i+1}) __*{vote_nick [i]}*__\n"
+            i=i+1
+        emb = discord.Embed(description = text,colour=discord.Color.light_grey())
+        await ctx.send(embed=emb)
+
+
+
+@Bot.command()
+@commands.has_role("EggMaster")
+async def rename(ctx, num: int, nam: str):
+    if golosovanie==1:
+        vote_nick[num-1] = nam
 
 
 
 
 @Bot.command()
+@commands.has_role("EggMaster")
 async def EndVote(ctx):
     global golosovanie
     if golosovanie==1:
@@ -86,7 +117,7 @@ async def EndVote(ctx):
         text=""
         while i<len(golos):
             print("dl")
-            text=f"{text} за вариант {i+1} проголосовало {golos[i]} людей\n\n"
+            text=f"{text} __*{vote_nick [i]}*__:\n  {golos[i]} голосов \n"
             i=i+1
         emb = discord.Embed(description = text,colour=discord.Color.light_grey())
         await ctx.send(embed=emb)
