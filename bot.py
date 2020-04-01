@@ -1,25 +1,15 @@
 import discord
 
-servers={
-    
-         
+servers={  
 }
-#print(servers["fjg"]["n"])
-#servers["fjg"]["h"]="l"
-#print(servers["fjg"]["h"])
-
-#"members"=["lzlz"]
-#"vote_nick"=[]
-#golos=[]
-#"ludi"=[]
-#"kolic"=0
-#"golosovanie"=0
-#"mut_role"=False
+votes={}
 
 
 from discord.ext import commands
 import os
 from discord.ext.commands import bot
+
+
 
 Bot=commands.Bot(command_prefix="")
 Bot.remove_command("help")
@@ -31,11 +21,6 @@ Bot.remove_command("help")
 async def on_guild_join(guild): # событие подключения к серверу
     servers[guild.id]={
         "members":["lzlz"],
-        "vote_nick":[],
-        "golos":[],
-        "ludi":[],
-        "kolic":0,
-        "golosovanie":0,
         "mut_role":False
     }
     category = guild.categories[0] # выбирает первую категорию из сервера, к которому подключился
@@ -73,63 +58,80 @@ async def help(ctx):
 @Bot.command()
 @commands.has_role("EggMaster")
 async def StartVote(ctx, kol: int):
-    servers[ctx.guild.id]["ludi"].clear()
+    j=0
+    modno=0
+    idd=""
+    while j<len(votes)and modno==0:
+        if len(votes[j])==0:
+            modno=1
+            idd=j
+            votes[j]={
+            "vote_nick":[],
+            "golos":[],
+            "ludi":[],
+            "kolic":kol,
+            "serv":ctx.guild
+            }
+        j=j+1
+    if modno==0:
+        print("ypa")
+        modno=1
+        idd=j
+        votes[j]={
+        "vote_nick":[],
+        "golos":[],
+        "ludi":[],
+        "kolic":kol,
+        "serv":ctx.guild
+        }
+        
+        print(votes[idd]["kolic"])
+        
+
     
-    servers[ctx.guild.id]["kolic"]=kol
-    servers[ctx.guild.id]["golos"].clear()
-    servers[ctx.guild.id]["vote_nick"].clear()
     i=0
-    while i<=servers[ctx.guild.id]["kolic"]:
-        servers[ctx.guild.id]["vote_nick"].append(i+1)        
+    while i<=votes[idd]["kolic"]:
+        print("1")
+        votes[idd]["vote_nick"].append(i+1)        
         i=i+1
-    
-    servers[ctx.guild.id]["golosovanie"]=1
-    i=0
-    while i<kol:
-        servers[ctx.guild.id]["golos"].append(0)
-        i=i+1
-    emb = discord.Embed(description = "голосование успешно началось",colour=discord.Color.light_grey())
+    z=0
+    while z<kol:
+        votes[idd]["golos"].append(0)
+        z=z+1
+    emb = discord.Embed(description = f"голосование успешно началось,Id голосования-{idd}",colour=discord.Color.light_grey())
     await ctx.send(embed=emb)  
 
 
 
 @Bot.command()
-async def vote(ctx, kol: int):
+async def vote(ctx, kol: int, idd: int):
     print("ok")
-    if servers[ctx.guild.id]["golosovanie"]==1:
-        if kol<=servers[ctx.guild.id]["kolic"] and kol != 0:
-
-            print("ok")
-            z=0
-            key=0
-            while z<len(servers[ctx.guild.id]["ludi"]) and key==0:
-                print("ok5")
-                if servers[ctx.guild.id]["ludi"][z]==ctx.author.id:
+    if len(votes[idd])>0:
+        if ctx.author in votes[idd]["serv"].members:
+            print(votes[idd]["serv"].members)
+            if kol<=votes[idd]["kolic"] and kol != 0:
+                print("ok")
+                if ctx.author.id in votes[idd]["ludi"]:
                     print("ok6")
-                    key=1
                     emb = discord.Embed(description = "вы уже голосовали",colour=discord.Color.light_grey())
                     await ctx.send(embed=emb)
-                z=z+1
-
-            if key==0:
-                print("ok7")
-                servers[ctx.guild.id]["ludi"].append(ctx.author.id)
-                #await ctx.send("ludi")
-                nick=servers[ctx.guild.id][ "vote_nick"]
-                servers[ctx.guild.id]["golos"][kol-1]=servers[ctx.guild.id]["golos"][kol-1]+1
-                emb = discord.Embed(description = f"Вы проголосовали за: {nick[kol-1]}",colour=discord.Color.light_grey())
-                await ctx.send(embed=emb)
+                else:
+                    print("ok7")
+                    votes[idd]["ludi"].append(ctx.author.id)
+                    nick=votes[idd][ "vote_nick"]
+                    votes[idd]["golos"][kol-1]=votes[idd]["golos"][kol-1]+1
+                    emb = discord.Embed(description = f"Вы проголосовали за: {nick[kol-1]}",colour=discord.Color.light_grey())
+                    await ctx.send(embed=emb)
 
 
 @Bot.command()
-async def VoteList(ctx):
-    servers[ctx.guild.id]["ludi"].append(ctx.author.name)
-    if servers[ctx.guild.id]["golosovanie"]==1:
+async def VoteList(ctx, idd: int):
+    if len(votes[idd])>0:
         i=0
         text=""
-        while i<len(servers[ctx.guild.id]["golos"]):
+        while i<len(votes[idd]["golos"]):
             print("dl")
-            nick=servers[ctx.guild.id][ "vote_nick"]
+            nick=votes[idd][ "vote_nick"]
             text=f"{text} {i+1}) __*{nick [i]}*__\n"
             i=i+1
         emb = discord.Embed(description = text,colour=discord.Color.light_grey())
@@ -139,29 +141,30 @@ async def VoteList(ctx):
 
 @Bot.command()
 @commands.has_role("EggMaster")
-async def rename(ctx, num: int, nam: str):
-    if servers[ctx.guild.id]["golosovanie"]==1:
-        if num<=servers[ctx.guild.id]["kolic"] and num !=0:
-            servers[ctx.guild.id]["vote_nick"][num-1] = nam
+async def rename(ctx, idd: int, num: int, nam: str):
+    if len(votes[idd])>0:
+        if num<=votes[idd]["kolic"] and num !=0:
+            votes[idd]["vote_nick"][num-1] = nam
 
 
 
 
 @Bot.command()
 @commands.has_role("EggMaster")
-async def EndVote(ctx):
-    if servers[ctx.guild.id]["golosovanie"]==1:
+async def EndVote(ctx, idd: int):
+    print(votes[idd])
+    if len(votes[idd])>0:
         i=0
         text=""
-        while i<len(servers[ctx.guild.id]["golos"]):
+        while i<len(votes[idd]["golos"]):
             print("dl")
-            nick=servers[ctx.guild.id][ "vote_nick"]
-            ick=servers[ctx.guild.id][ "golos"]
+            nick=votes[idd][ "vote_nick"]
+            ick=votes[idd][ "golos"]
             text=f"{text} __*{nick[i]}*__:\n  {ick[i]} голосов \n"
             i=i+1
         emb = discord.Embed(description = text,colour=discord.Color.light_grey())
         await ctx.send(embed=emb)
-        servers[ctx.guild.id]["golosovanie"]=0
+        votes[idd].clear()
         
         
     
@@ -181,7 +184,6 @@ async def привет(ctx):
 async def пока(ctx):
     author=ctx.message.author
     await ctx.send(f"пока{author.mention}")
-
 
 
 
@@ -408,6 +410,12 @@ async def add(ctx, member:discord.Member, text ):
     emb = discord.Embed(description = vid,colour=discord.Color.light_grey())
     await ctx.send(embed=emb)
     print(servers[ctx.guild.id]["members"])
+
+
+
+
+
+
 
 
 
