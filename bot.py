@@ -45,9 +45,9 @@ async def help(ctx):
     role=discord.utils.get(ctx.guild.roles, name="EggMaster")
     emb=""
     if role in author.roles:
-        emb = discord.Embed(description = "Вот команды, которые ты можешь использовать  \n Команды пишутся без префикса\n __*help*__ - Выдает список доступных команд \n __*link*__ - Дает ссылку и краткое описание бота \n **Регулятивные команды:**\n Стандартные команды для наказания участников\n __*bun*__{member} - банит указаного участника \n __*mute*__{member} - мутит указаного участника\n __*unmute*__{member} - снятие мута с указаного участника\n **Текстовые команды:**\n Команды для контроля за текстовыми каналами\n  __*find*__{\"text\"} - Выдает сколко раз каждый участник употреблял указанную фразу, полезно для отлова фейков \n __*clear*__{number} - Стирает указанное число сообщений, начиная с последнего \n __*count*__{id} - считает сколько сообщений было отправлено с указаного Id сообщения\n **Команды для голосований:**\n Помогает создавать как анонимные, так и открытые голосования __*StartVote*__{number} - Запускает голосование с указанным числом участников \n __*rename*__{number} {\"text\"} - Переименовывает кандидата с указанным номером \n __*VoteList*__ - Выдает список кандидатов с их номером голосования, можно использовать как в каналах сервера, так и в личных сообщениях с ботом \n __*vote*__{number} - Отдать голос за кандидата с указаным номером, можно использовать как в каналах сервера, так и в личных сообщениях с ботом  \n __*EndVote*__ - Закончить голосование, подведение итогов \n **Команды информации об участнике:**\n Информация об участнике помогает другим людям знать, как правильно общаться с выбранным участником. Рекомендуется сохранять всю информацию т.к. при обновлении бота вся известная информация стирается. \n__*info*__{member} - выдает всю записанную информацию об участнике\n __*reset*__{member} {\"text\"} - заменяет известную информацию на новую\n __*add*__{member} {\"text\"} - дополняет известную информацию новой\n",colour=discord.Color.light_grey())
+        emb = discord.Embed(description = "Вот команды, которые ты можешь использовать  \n Команды пишутся без префикса\n __*help*__ - Выдает список доступных команд \n __*link*__ - Дает ссылку и краткое описание бота \n **Регулятивные команды:**\n Стандартные команды для наказания участников\n __*bun*__{member} - банит указаного участника \n __*mute*__{member} - мутит указаного участника\n __*unmute*__{member} - снятие мута с указаного участника\n **Текстовые команды:**\n Команды для контроля за текстовыми каналами\n  __*find*__{\"text\"} - Выдает сколко раз каждый участник употреблял указанную фразу, полезно для отлова фейков \n __*clear*__{number} - Стирает указанное число сообщений, начиная с последнего \n __*count*__{id} - считает сколько сообщений было отправлено с указаного Id сообщения\n **Команды для голосований:**\n Помогает создавать как анонимные, так и открытые голосования __*StartVote*__{number} - Запускает голосование с указанным числом участников \n __*rename*__{ID} {number} {\"text\"} - Переименовывает кандидата в голосовании, с указанным Id, с указанным номером \n __*VoteList*__{ID} - Выдает список кандидатов в голосовании, с указанным Id, с их номером голосования, можно использовать как в каналах сервера, так и в личных сообщениях с ботом \n __*vote*__ {ID} {number} - Отдать голос за кандидата в голосовании, с указанным Id, с указаным номером, можно использовать как в каналах сервера, так и в личных сообщениях с ботом  \n __*EndVote*__ {ID} - Закончить голосование, с указанным Id,, подведение итогов \n **Команды информации об участнике:**\n Информация об участнике помогает другим людям знать, как правильно общаться с выбранным участником. Рекомендуется сохранять всю информацию т.к. при обновлении бота вся известная информация стирается. \n__*info*__{member} - выдает всю записанную информацию об участнике\n __*reset*__{member} {\"text\"} - заменяет известную информацию на новую\n __*add*__{member} {\"text\"} - дополняет известную информацию новой\n",colour=discord.Color.light_grey())
     else:
-         emb = discord.Embed(description = "Вот команды, которые ты можешь использовать \n Команды пишутся без префикса\n __*help*__-Выдает список доступных команд\n __*link*__ - Дает ссылку и краткое описание бота \n __*VoteList*__ - Выдает список кандидатов с их номером голосования, можно использовать как в каналах сервера, так и в личных сообщениях с ботом  \n __*vote*__{number} - отдать голос за кандидата с указаным номером, можно использовать как в каналах сервера, так и в личных сообщениях с ботом  \n __*count*__{id} - считает сколько сообщений было отправлено с указаного Id сообщения\n",colour=discord.Color.light_grey())
+         emb = discord.Embed(description = "Вот команды, которые ты можешь использовать \n Команды пишутся без префикса\n __*help*__-Выдает список доступных команд\n __*link*__ - Дает ссылку и краткое описание бота \n __*VoteList*__ {ID} - Выдает список кандидатов в голосовании, с указанным Id, с их номером голосования, можно использовать как в каналах сервера, так и в личных сообщениях с ботом  \n __*vote*__ {ID} {number} - отдать голос за кандидата в голосовании, с указанным ID, с указаным номером, можно использовать как в каналах сервера, так и в личных сообщениях с ботом  \n __*count*__{id} - считает сколько сообщений было отправлено с указаного Id сообщения\n",colour=discord.Color.light_grey())
     await ctx.send(embed=emb)
 
 
@@ -98,13 +98,14 @@ async def StartVote(ctx, kol: int):
     while z<kol:
         votes[idd]["golos"].append(0)
         z=z+1
-    emb = discord.Embed(description = f"голосование успешно началось,Id голосования-{idd}",colour=discord.Color.light_grey())
-    await ctx.send(embed=emb)  
+    emb = discord.Embed(description = f"голосование успешно началось,Id голосования: **{idd}**",colour=discord.Color.light_grey())
+    await ctx.send(embed=emb)
+    #await ctx.send(idd)
 
 
 
 @Bot.command()
-async def vote(ctx, kol: int, idd: int):
+async def vote(ctx, idd: int, kol: int):
     print("ok")
     if len(votes[idd])>0:
         if ctx.author in votes[idd]["serv"].members:
@@ -127,15 +128,16 @@ async def vote(ctx, kol: int, idd: int):
 @Bot.command()
 async def VoteList(ctx, idd: int):
     if len(votes[idd])>0:
-        i=0
-        text=""
-        while i<len(votes[idd]["golos"]):
-            print("dl")
-            nick=votes[idd][ "vote_nick"]
-            text=f"{text} {i+1}) __*{nick [i]}*__\n"
-            i=i+1
-        emb = discord.Embed(description = text,colour=discord.Color.light_grey())
-        await ctx.send(embed=emb)
+        if ctx.author in votes[idd]["serv"].members:
+            i=0
+            text=""
+            while i<len(votes[idd]["golos"]):
+                print("dl")
+                nick=votes[idd][ "vote_nick"]
+                text=f"{text} {i+1}) __*{nick [i]}*__\n"
+                i=i+1
+            emb = discord.Embed(description = text,colour=discord.Color.light_grey())
+            await ctx.send(embed=emb)
 
 
 
@@ -143,8 +145,9 @@ async def VoteList(ctx, idd: int):
 @commands.has_role("EggMaster")
 async def rename(ctx, idd: int, num: int, nam: str):
     if len(votes[idd])>0:
-        if num<=votes[idd]["kolic"] and num !=0:
-            votes[idd]["vote_nick"][num-1] = nam
+        if ctx.author in votes[idd]["serv"].members:
+            if num<=votes[idd]["kolic"] and num !=0:
+                votes[idd]["vote_nick"][num-1] = nam
 
 
 
@@ -154,17 +157,18 @@ async def rename(ctx, idd: int, num: int, nam: str):
 async def EndVote(ctx, idd: int):
     print(votes[idd])
     if len(votes[idd])>0:
-        i=0
-        text=""
-        while i<len(votes[idd]["golos"]):
-            print("dl")
-            nick=votes[idd][ "vote_nick"]
-            ick=votes[idd][ "golos"]
-            text=f"{text} __*{nick[i]}*__:\n  {ick[i]} голосов \n"
-            i=i+1
-        emb = discord.Embed(description = text,colour=discord.Color.light_grey())
-        await ctx.send(embed=emb)
-        votes[idd].clear()
+        if ctx.author in votes[idd]["serv"].members:
+            i=0
+            text=f"**Голосование** __*{idd}*__ **окончено:**\n"
+            while i<len(votes[idd]["golos"]):
+                print("dl")
+                nick=votes[idd][ "vote_nick"]
+                ick=votes[idd][ "golos"]
+                text=f"{text} __*{nick[i]}*__:\n  {ick[i]} голосов \n"
+                i=i+1
+            emb = discord.Embed(description = text,colour=discord.Color.light_grey())
+            await ctx.send(embed=emb)
+            votes[idd].clear()
         
         
     
