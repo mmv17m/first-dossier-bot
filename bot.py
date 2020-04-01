@@ -115,8 +115,9 @@ async def vote(ctx, kol: int):
                 print("ok7")
                 servers[ctx.guild.id]["ludi"].append(ctx.author.id)
                 #await ctx.send("ludi")
+                nick=servers[ctx.guild.id][ "vote_nick"]
                 servers[ctx.guild.id]["golos"][kol-1]=servers[ctx.guild.id]["golos"][kol-1]+1
-                emb = discord.Embed(description = f"Вы проголосовали за: {servers[ctx.guild.id]["vote_nick"][kol-1]}",colour=discord.Color.light_grey())
+                emb = discord.Embed(description = f"Вы проголосовали за: {nick[kol-1]}",colour=discord.Color.light_grey())
                 await ctx.send(embed=emb)
 
 
@@ -128,7 +129,8 @@ async def VoteList(ctx):
         text=""
         while i<len(servers[ctx.guild.id]["golos"]):
             print("dl")
-            text=f"{text} {i+1}) __*{servers[ctx.guild.id]["vote_nick"] [i]}*__\n"
+            nick=servers[ctx.guild.id][ "vote_nick"]
+            text=f"{text} {i+1}) __*{nick [i]}*__\n"
             i=i+1
         emb = discord.Embed(description = text,colour=discord.Color.light_grey())
         await ctx.send(embed=emb)
@@ -153,7 +155,9 @@ async def EndVote(ctx):
         text=""
         while i<len(servers[ctx.guild.id]["golos"]):
             print("dl")
-            text=f"{text} __*{servers[ctx.guild.id]["vote_nick"][i]}*__:\n  {servers[ctx.guild.id]["golos"][i]} голосов \n"
+            nick=servers[ctx.guild.id][ "vote_nick"]
+            ick=servers[ctx.guild.id][ "golos"]
+            text=f"{text} __*{nick[i]}*__:\n  {ick[i]} голосов \n"
             i=i+1
         emb = discord.Embed(description = text,colour=discord.Color.light_grey())
         await ctx.send(embed=emb)
