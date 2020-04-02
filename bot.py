@@ -377,7 +377,7 @@ async def info(ctx, member:discord.Member):
 @commands.has_role("EggMaster")
 async def reset(ctx, member:discord.Member, text ):
     m=member
-    servers[ctx.guild.id]["members"]=[m,text]
+    member=[m,text]
     servers[ctx.guild.id]["members"].append(member)
 
     vid="нет значения"
@@ -392,6 +392,7 @@ async def reset(ctx, member:discord.Member, text ):
     emb = discord.Embed(description = vid,colour=discord.Color.light_grey())
     await ctx.send(embed=emb)
     print(servers[ctx.guild.id]["members"])
+
 
 
 
