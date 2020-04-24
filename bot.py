@@ -151,7 +151,7 @@ async def rename(ctx, idd: int, num: int, nam: str):
 
 
 
-
+ 
 @Bot.command()
 @commands.has_role("EggMaster")
 async def EndVote(ctx, idd: int):
